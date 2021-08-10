@@ -1,0 +1,60 @@
+---
+title: "Wild Data"
+author: "Scout Leonard"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(janitor)
+library(tidyverse)
+
+mack_verts <- read.csv(here::here("data", "AS00601.csv")) %>% 
+  clean_names()
+
+```
+
+The study is about a vertebrate survey. 
+
+
+```{r}
+mc_wt_5 <- mack_verts$weight[5]
+mc_wt_5
+
+mc_length_8_20 <- mack_verts$length1[8:20]
+mc_length_8_20
+
+mc_dates <- mack_verts$sampledate
+
+```
+
+```{r}
+mc_salamanders <- mack_verts %>% 
+  filter(species == "DITE")
+
+ggplot(data = mc_salamanders, aes(x = length1, y = weight)) +
+  geom_point(color = "cornflowerblue") +
+  labs(title = "Ratio of Snout-Vent Length to Weight for Dicamptodon tenebrosus",
+       x = "Snout Length (mm) ",
+       y = "Weight (g)")
+
+ggsave(here::here("figs", "salamander_size.png"))
+```
+
+```{r}
+mc_trout <- mack_verts %>% 
+  filter(species == "ONCL")
+
+mc_trout_graph <- ggplot(data = mc_trout, aes(x = length1, y = weight)) +
+  geom_point(aes(color = reach))
+mc_trout_graph + scale_color_manual(values = c("goldenrod1", "cyan4", "darkslateblue")) +
+  facet_wrap(~reach) +
+  labs(title = "Cutthroat Trout Size",
+       x = "Length (mm)",
+       y = "Weight(g)")
+
+ggsave(here::here("figs", "cutthroat_size.png"))
+```
+

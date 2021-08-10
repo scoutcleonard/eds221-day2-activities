@@ -1,0 +1,67 @@
+---
+title: "R Data Types"
+author: "Scout Leonard"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+vec_1 <- c(2, 5, 9, 10, 8, 12, 1, 0)
+vec_1
+
+class(vec_1)
+
+typeof(vec_1)
+
+vec_1_e3 <- vec_1[3]
+vec_1_e3
+
+vec_1_e1 <- vec_1[1]
+vec_1_e1
+
+vec_1_e5to7 <- vec_1[5:7]
+vec_1_e5to7
+
+vec_1_char <- as.character(vec_1)
+vec_1_char
+class(vec_1_char)
+
+
+```
+
+```{r}
+vec_2 <- c(town = "santa Barbara", location = "Rincon", swell = "south")
+class(vec_2)
+typeof(vec_2)
+
+vec_2[2]
+
+vec_2["location"]
+
+length(vec_2)
+
+vec_2_e2 <- vec_2[2]
+vec_2_e2
+```
+The class of vector elements is character. The length of vector 2 is 3. 
+
+```{r}
+df_1 <- data.frame(region = c("A", "B", "A", "D"),
+                   species = c("otter", "great white", "sea Lion", "gray whale"),
+                   count = c(12, 2, 36, 6))
+
+df_1
+
+class(df_1)
+
+class(df_1$species)
+
+max_count <- max(df_1$count)
+max_count
+```
+
+
